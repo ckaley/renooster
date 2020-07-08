@@ -25,7 +25,7 @@ module.exports = function(app) {
   });
 
   app.delete("/api/subscriptions/:id", function(req, res) {
-    db.Subscritions.destroy({
+    db.Subscription.destroy({
       where: {
         id: req.params.id
       }
