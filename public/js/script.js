@@ -14,8 +14,8 @@ $(function () {
             $("#startDate").val("")
             $("#endDate").val("")
 
-            // navigate to "/subscriptions"
-            window.location.href = "/subscriptions"
+            // navigate to "/"
+            window.location.href = "/"
         }).catch(err => console.log(err))
     }
 
@@ -35,7 +35,7 @@ $(function () {
                     endDate,
                 } = subscription
 
-                // format subscritioin as bootstrap card
+                // format subscription as bootstrap card
                 const card = `
                     <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
                         <div class="card">

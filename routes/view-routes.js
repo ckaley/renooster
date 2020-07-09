@@ -8,7 +8,7 @@ module.exports = function (app) {
 
     // @route:  GET /subscriptions
     // @desc:   Return subscriptions template
-    app.get("/subscriptions", function (req, res) {
-        res.render("subscriptions");
+    app.get("/add", function (req, res) {
+        res.render("add");
     });
 };
