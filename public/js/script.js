@@ -41,8 +41,8 @@ $(function () {
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">${name}</h5>
-                                <p class="card-text">${startDate}</p>
-                                <p class="card-text">${endDate}</p>
+                                <p class="card-text">Start Date: <i>${startDate}</i></p>
+                                <p class="card-text">End Date: <i>${endDate}</i></p>
                                 <button type="button" class="btn btn-primary">Edit</button>
                                 <button type="button" class="btn btn-danger">Delete</button>
                             </div>
