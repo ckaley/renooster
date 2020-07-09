@@ -1,4 +1,5 @@
 var db = require("../models");
+var authController = require("./authcontroller");
 
 module.exports = function(app, passport) {
     // @route:  POST /
