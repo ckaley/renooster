@@ -6,9 +6,9 @@ module.exports = function (app) {
         res.render("index");
     });
 
-    // @route:  GET /posts
-    // @desc:   Return posts template
-    app.get("/posts", function (req, res) {
-        res.render("posts");
+    // @route:  GET /subscriptions
+    // @desc:   Return subscriptions template
+    app.get("/subscriptions", function (req, res) {
+        res.render("subscriptions");
     });
 };
