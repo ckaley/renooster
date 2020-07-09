@@ -1,8 +1,11 @@
 $(function () {
+    //global empty variables
     let name = ''
     let startDate = ''
     let endDate = ''
 
+
+    //CREATE NEW SUBSCRIPTION - front end api call that sends user generated data to server
     const createSubscription = payload => {
         $.ajax({
             method: "POST",
@@ -19,6 +22,7 @@ $(function () {
         }).catch(err => console.log(err))
     }
 
+    //SHOW ALL SUBSCRIPTIONS - front end api call that fetches all data from the database and appends to page
     const fetchSubscriptions = () => {
         $.ajax({
             method: "GET",
@@ -26,7 +30,7 @@ $(function () {
         }).then(subscriptions => {
             console.log(subscriptions)
 
-            // append new node for each post
+            // append new node for each subscription
             subscriptions.forEach(subscription => {
                 // destructure subscription
                 const {
@@ -55,19 +59,19 @@ $(function () {
         }).catch(err => console.log(err))
     }
 
-    // handle change event for my title input
+    // handle change event for adding subscription name
     $("#name").on("change", event => {
         // destructure event
         name = event.target.value
     })
 
-    // handle change event for my body input
+    // handle change event for adding start date
     $("#startDate").on("change", event => {
         // destructure event
         startDate = event.target.value
     })
 
-       // handle change event for my body input
+       // handle change event for adding end date
        $("#endDate").on("change", event => {
         // destructure event
         endDate = event.target.value
@@ -85,7 +89,7 @@ $(function () {
             endDate: endDate
         }
 
-        // create post
+        // create subscription
         createSubscription(payload)
     })
 
