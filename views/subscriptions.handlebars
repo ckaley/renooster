@@ -12,10 +12,11 @@
     </div>
     <div class="row" id="subscriptions">
         {{#each subscriptions}}
+        {{log}}
         <div class="card">
             <h5 class="card-header">{{name}}</h5>
             <div class="card-body">
-                <p class="card-text">{{startDate}}</p>
+                <b><p class="card-text">{{startDate}}</p></b>
                 <p class="card-text">{{endDate}}</p>
                 <button type="button" class="btn btn-primary">Edit</button>
                 <button type="button" class="btn btn-danger">Delete</button>

@@ -28,13 +28,11 @@ $(function () {
 
             // append new node for each post
             subscriptions.forEach(subscription => {
-                console.log(subscription)
-                // destructure post
+                // destructure subscription
                 const {
                     name,
                     startDate,
                     endDate,
-                    createdAt
                 } = subscription
 
                 // format subscritioin as bootstrap card
@@ -45,13 +43,12 @@ $(function () {
                                 <h5 class="card-title">${name}</h5>
                                 <p class="card-text">${startDate}</p>
                                 <p class="card-text">${endDate}</p>
-                                <p class="card-text"><small>${moment(createdAt).fromNow()}</small></p>
+                                <button type="button" class="btn btn-primary">Edit</button>
+                                <button type="button" class="btn btn-danger">Delete</button>
                             </div>
                         </div>
                     </div>
                 `
-                console.log(card)
-
                 // append card to dom
                 $("#subscriptions").append(card)
             })
