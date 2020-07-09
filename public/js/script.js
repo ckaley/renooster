@@ -78,7 +78,7 @@ $(function () {
     })
 
     // handle submit event
-    $("form").on("submit", event => {
+    $("#addSubForm").on("submit", event => {
         // prevent default
         event.preventDefault()
 
