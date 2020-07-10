@@ -28,11 +28,19 @@ module.exports = function(app, passport) {
     // @desc: Rout that executes the logout method defined in authcontroller.js. detroys the session
     app.get('/logout',authController.logout);
 
+    
+    // @route: POST /
+    // @desc: Route for signing in a user (creates a session)
+    app.post('/login', passport.authenticate('local-signin', {
+        successRedirect: '/',
+        failureRedirect: '/login'
+    }));
 
+    
     //function that restricts access to '/' page unless the user is logged in
     function isLoggedIn(req, res, next) {
         if (req.isAuthenticated())
             return next();
         res.redirect('/login');
-    }
+    };
 };

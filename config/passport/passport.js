@@ -24,7 +24,7 @@ module.exports = function(passport, user) {
         });
     });
 
-    //define custom strategy
+    //define custom strategy for registering new user
     passport.use('local-signup', new LocalStrategy(
         {
             usernameField: 'email',
@@ -70,6 +70,50 @@ module.exports = function(passport, user) {
         });
     }
 ));
-}
+
+
+
+
+    //define custom strategy for singing in a user
+    passport.use('local-signin', new LocalStrategy(
+        {
+            usernameField: 'email',
+            passwordField: 'password',
+            passReqToCallback: true //this allows us to pass back the entire request to the callback
+        },
+
+        function(req, email, password, done){
+            var User = user;
+            var isValidPassword = function(userpass, password){
+                return bCrypt.compareSync(password, userpass);
+            }
+            User.findOne({
+                where: {
+                    email: email
+                }
+            }).then(function(user){
+                if (!user){
+                    return done(null, false, {
+                        message: "This user does not exist"
+                    });
+                }
+
+                if (!isValidPassword(user.password, password)){
+                    return done(null, false, {
+                        message: "Incorrect password"
+                    });
+                }
+
+                var userinfo = user.get();
+                return done(null, userinfo);
+            }).catch(function(err){
+                console.log("Error loggin in user", err);
+                return done(null, false, {
+                    message: "There was an error signing you in"
+                });
+            });
+        }
+    ));
+};
 
 
