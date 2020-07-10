@@ -1,6 +1,7 @@
 // import dependencies
 var express = require('express');
 var exphbs = require("express-handlebars");
+var moment = require("moment")
 
 // setup the express app
 var app = express();
