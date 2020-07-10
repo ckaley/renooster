@@ -47,8 +47,8 @@ $(function () {
                                 <h5 class="card-title">${name}</h5>
                                 <p class="card-text">Start Date: <i>${startDate}</i></p>
                                 <p class="card-text">End Date: <i>${endDate}</i></p>
-                                <button type="button" class="btn btn-primary">Edit</button>
-                                <button type="button" class="btn btn-danger">Delete</button>
+                                <a href="/edit" type="edit" class="edit btn btn-primary">Edit</a>
+                                <a href="/delete" type="button" class="btn btn-danger">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -56,6 +56,27 @@ $(function () {
                 // append card to dom
                 $("#subscriptions").append(card)
             })
+        }).catch(err => console.log(err))
+    }
+
+    // HEY GUYS THIS DOESNT WORK, THIS IS WHERE I LEFT OFF
+    //update SUBSCRIPTION - front end api call that sends user generated data to server
+    const updateSubscription = payload => {
+
+        $.ajax({
+            method: "PUT",
+            url: "/api/subscriptions",
+            data: payload
+        }).then(() => {
+            // reset form inputs
+            console.log("HERE I AM" + payload)
+            // fill fields with existing dataTypes
+            $("#name").val(payload.name)
+            $("#startDate").val(payload.startDate)
+            $("#endDate").val(payload.endDate)
+
+            // navigate to "/"
+            window.location.href = "/"
         }).catch(err => console.log(err))
     }
 
@@ -71,8 +92,8 @@ $(function () {
         startDate = event.target.value
     })
 
-       // handle change event for adding end date
-       $("#endDate").on("change", event => {
+    // handle change event for adding end date
+    $("#endDate").on("change", event => {
         // destructure event
         endDate = event.target.value
     })
