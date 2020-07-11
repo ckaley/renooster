@@ -56,8 +56,8 @@ $(function () {
                                 <h5 class="card-title">${name}</h5>
                                 <p class="card-text">Start Date: <i>${startDate}</i></p>
                                 <p class="card-text">End Date: <i>${endDate}</i></p>
-                                <p class="card-text">End Date: <i>${price}</i></p>
-                                <p class="card-text">End Date: <i>${frequency}</i></p>
+                                <p class="card-text">Price: <i>${price}</i></p>
+                                <p class="card-text">Frequency: <i>${frequency}</i></p>
                                 <button class="btn btn-secondary editBtn" id="${id}">Edit</button>
                                 <button class="btn btn-danger deleteBtn" id="${id}">Delete</button>
                             </div>
@@ -125,6 +125,17 @@ $(function () {
     $("#endDate").on("change", event => {
         // destructure event
         endDate = event.target.value
+    })
+
+    $("#price").on("change", event => {
+        // destructure event
+        price = event.target.value
+    })
+
+    // handle change event for adding start date
+    $("#frequency").on("change", event => {
+        // destructure event
+        frequency = event.target.value
     })
 
     // handle submit event
@@ -206,7 +217,7 @@ $(function () {
 
     $("#edit-frequency").on("change", event => {
         // destructure event
-        frequncy = event.target.value
+        frequency = event.target.value
     })
 
     // handle edit event
