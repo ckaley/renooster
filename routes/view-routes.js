@@ -11,7 +11,11 @@ module.exports = function (app) {
     app.get("/add", function (req, res) {
         res.render("add");
     });
-    app.get("/edit", function (req, res) {
-        res.render("edit");
+
+    // @route:  GET /edit
+    // @desc:   Return edit template  
+    app.get("/edit/:id", function (req, res) {
+        console.log('hey hey hey',req.params)
+        res.render("edit", req.params);
     });
 };
