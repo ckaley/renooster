@@ -1,6 +1,7 @@
 $(function () {
     //global empty variables
     let editId
+    let deleteId
     let name = ''
     let startDate = ''
     let endDate = ''
@@ -63,27 +64,39 @@ $(function () {
     }
 
     
-        // HEY GUYS THIS DOESNT WORK, THIS IS WHERE I LEFT OFF
-            //update SUBSCRIPTION - front end api call that sends user generated data to server
-            const updateSubscription = payload => {
-                console.log(payload)
-                $.ajax({
-                    method: "PUT",
-                    url: "/api/edit/" + payload.id,
-                    data: payload
-                }).then(() => {
-                    // reset form inputs
-                    console.log("HERE I AM" + payload)
-                    console.log(payload)
-                    // fill fields with existing dataTypes
-                    $("#name").val(payload.name)
-                    $("#startDate").val(payload.startDate)
-                    $("#endDate").val(payload.endDate)
+    //UPDATE SUBSCRIPTION - front end api call that sends user generated data to server
+    const updateSubscription = payload => {
+        console.log(payload)
+        $.ajax({
+            method: "PUT",
+            url: "/api/edit/" + payload.id,
+            data: payload
+        }).then(() => {
+            // reset form inputs
+            console.log("HERE I AM" + payload)
+            console.log(payload)
+            // fill fields with existing dataTypes
+            $("#name").val(payload.name)
+            $("#startDate").val(payload.startDate)
+            $("#endDate").val(payload.endDate)
 
-                    // navigate to "/"
-                    window.location.href = "/"
-                }).catch(err => console.log(err))
-            }
+            // navigate to "/"
+            window.location.href = "/"
+        }).catch(err => console.log(err))
+    }
+
+    //DELETE subscription
+    const deleteSubscription = deleteId => {
+        console.log(deleteId)
+        $.ajax({
+            method: "DELETE",
+            url: "/api/subscriptions/" + deleteId,
+            data: deleteId
+        }).then(() =>{
+            console.log("You deleted subscription with id: " +deleteId)
+            location.reload()
+        })
+    }
     
 
     // handle change event for adding subscription name
@@ -141,6 +154,19 @@ $(function () {
         window.location.href = `/edit/${id}`
     })
 })
+
+
+    //event handler for deleteBtn
+    $("div").on("click", ".deleteBtn", event => {
+        console.log("gonna delete a sub")
+        console.log(event.target.id)
+        var id = event.target.id
+        deleteId = id
+        console.log(deleteId)
+        event.stopPropagation()
+        deleteSubscription(deleteId)
+
+    })
 
 
     // handle change event for adding subscription name
