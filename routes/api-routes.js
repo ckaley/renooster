@@ -52,7 +52,9 @@ module.exports = function(app) {
     db.Subscription.update({
       name: req.body.name,
       startDate: req.body.startDate,
-      endDate: req.body.endDate
+      endDate: req.body.endDate,
+      price: req.body.price,
+      frequency: req.body.frequency
       }, {
         where: {
           id: req.params.id

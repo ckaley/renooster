@@ -5,6 +5,8 @@ $(function () {
     let name = ''
     let startDate = ''
     let endDate = ''
+    let price = 0.0
+    let frequency = ''
 
 
     //CREATE NEW SUBSCRIPTION - front end api call that sends user generated data to server
@@ -18,6 +20,8 @@ $(function () {
             $("#name").val("")
             $("#startDate").val("")
             $("#endDate").val("")
+            $("#price").val("")
+            $("#frequency").val("")
 
             // navigate to "/"
             window.location.href = "/"
@@ -40,6 +44,8 @@ $(function () {
                     name,
                     startDate,
                     endDate,
+                    price,
+                    frequency
                 } = subscription
 
                 // format subscription as bootstrap card
@@ -50,6 +56,8 @@ $(function () {
                                 <h5 class="card-title">${name}</h5>
                                 <p class="card-text">Start Date: <i>${startDate}</i></p>
                                 <p class="card-text">End Date: <i>${endDate}</i></p>
+                                <p class="card-text">Price: <i>${price}</i></p>
+                                <p class="card-text">Frequency: <i>${frequency}</i></p>
                                 <button class="btn btn-secondary editBtn" id="${id}">Edit</button>
                                 <button class="btn btn-danger deleteBtn" id="${id}">Delete</button>
                             </div>
@@ -79,6 +87,8 @@ $(function () {
             $("#name").val(payload.name)
             $("#startDate").val(payload.startDate)
             $("#endDate").val(payload.endDate)
+            $("#price").val(payload.price)
+            $("#frequency").val(payload.frequency)
 
             // navigate to "/"
             window.location.href = "/"
@@ -117,6 +127,17 @@ $(function () {
         endDate = event.target.value
     })
 
+    $("#price").on("change", event => {
+        // destructure event
+        price = event.target.value
+    })
+
+    // handle change event for adding start date
+    $("#frequency").on("change", event => {
+        // destructure event
+        frequency = event.target.value
+    })
+
     // handle submit event
     $("#addSubForm").on("submit", event => {
         // prevent default
@@ -126,7 +147,9 @@ $(function () {
         const payload = {
             name: name,
             startDate: startDate,
-            endDate: endDate
+            endDate: endDate,
+            price: price,
+            frequency
         }
 
         // create subscription
@@ -187,6 +210,16 @@ $(function () {
         endDate = event.target.value
     })
 
+    $("#edit-price").on("change", event => {
+        // destructure event
+        price = event.target.value
+    })
+
+    $("#edit-frequency").on("change", event => {
+        // destructure event
+        frequency = event.target.value
+    })
+
     // handle edit event
     $("#editSubForm").on("submit", event => {
         // prevent default
@@ -199,7 +232,9 @@ $(function () {
             id: $("#editSubmitBtn").attr("data"),
             name: name,
             startDate: startDate,
-            endDate: endDate
+            endDate: endDate,
+            price: price,
+            frequency: frequency
         }
         console.log(payload)
         updateSubscription(payload)
