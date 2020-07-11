@@ -12,5 +12,10 @@ module.exports = function (app) {
         res.render("add");
     });
 
-
+    // @route:  GET /edit
+    // @desc:   Return edit template  
+    app.get("/edit/:id", function (req, res) {
+        console.log('hey hey hey',req.params)
+        res.render("edit", req.params);
+    });
 };

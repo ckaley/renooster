@@ -42,10 +42,12 @@ module.exports = function(app) {
       res.json(dbSubscription);
     });
   });
+  
 
   // @route:  PUT /
   // @desc:   Update one record from the subscriptions table by ID
-  app.put("/api/subscriptions/:id", function(req, res){
+  app.put("/api/edit/:id", function(req, res){
+    console.log("I am here, please acknowledge that I am here")
     //Update takes in object descriping the properties we want to update. Uses WHERE to specify the object that is to be updated
     db.Subscription.update({
       name: req.body.name,
@@ -53,7 +55,7 @@ module.exports = function(app) {
       endDate: req.body.endDate
       }, {
         where: {
-          id: req.body.id
+          id: req.params.id
         }
       })
       .then(function(dbSubscription) {
