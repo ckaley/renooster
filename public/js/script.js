@@ -89,6 +89,54 @@ $(function () {
       .catch((err) => console.log(err));
   };
 
+    //SHOW ALL EXPIRING SOON SUBSCRIPTIONS - front end api call that fetches date specific data from the database and appends to page
+    //--------------------------------------------------------------------------------------------------------------------------
+    const expireSubscriptions = () => {
+      $.ajax({
+          method: "GET",
+          url: "/api/subscriptions/expire"
+      }).then(subscriptions => {
+          console.log("expiring soon:")
+          console.log(subscriptions)
+          // append new node for each subscription
+          subscriptions.forEach(subscription => {
+              // destructure subscription
+              const {
+                  id,
+                  name,
+                  startDate,
+                  endDate,
+                  price,
+                  frequency
+              } = subscription
+              // format subscription as bootstrap card
+              const expiringCards = `
+                  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+                      <div class="card">
+                          <div class="card-body">
+                              <h5 class="card-title">${name}</h5>
+                              <p class="card-text">Start Date: <i>${startDate}</i></p>
+                              <p class="card-text expireWarning">End Date: <i>${endDate}</i></p>
+                              <p class="card-text">Price: <i>${price}</i></p>
+                              <p class="card-text">Frequency: <i>${frequency}</i></p>
+                              <button class="btn btn-secondary editBtn" id="${id}">Edit</button>
+                              <button class="btn btn-danger deleteBtn" id="${id}">Delete</button>
+                          </div>
+                      </div>
+                  </div>
+              `
+              console.log("appending to page....")
+              //clear the page
+              
+              // append cards to dom
+              $("#subscriptions").append(expiringCards)
+              subStore.push(subscription)
+              localStorage.setItem("savedSubs", JSON.stringify(subStore))
+
+          })
+      }).catch(err => console.log(err))
+  }
+
   //UPDATE SUBSCRIPTION - front end api call that allows user to update data in database by ID
   //--------------------------------------------------------------------------------------------------------------------------
   const updateSubscription = (payload) => {
@@ -281,11 +329,22 @@ $(function () {
     audioElement.play();
   });
 
+  //EXPIRING SOON
+    //--------------------------------------------------------------------------------------------------------------------------
+    //event handler for expireBtn
+    $("div").on("click", "#expireBtn", event => {
+      event.stopPropagation()
+      $("#subscriptions").empty()
+      expireSubscriptions()
+
+  })
+
   //==========================================================================================================================
   //FUNCTION TO POPULATE PAGE
   //==========================================================================================================================
   // call function to render all existing subscription records to page
   fetchSubscriptions();
+  
 
   //==========================================================================================================================
   //MODAL FUNCTIONALITY
