@@ -1,4 +1,4 @@
-//import dependencies
+//IMPORT DEPENDENCIES
 var bCrypt = require('bcrypt-nodejs');
 
 
@@ -6,9 +6,8 @@ module.exports = function(passport, user) {
     //initialize the passport-local strategy and the user model
     var User = user;
     var LocalStrategy = require('passport-local').Strategy;
-    
 
-    //serialize
+    //serialize user
     passport.serializeUser(function(user, done) {
         done(null, user.id);
     });
@@ -24,7 +23,12 @@ module.exports = function(passport, user) {
         });
     });
 
-    //define custom strategy for registering new user
+    //==========================================================================================================================
+    //STRATEGIES
+    //==========================================================================================================================
+
+    //CUSTOM LOCAL STRATEGY FOR CREATING AND ADDING A NEW USER
+    //--------------------------------------------------------------------------------------------------------------------------
     passport.use('local-signup', new LocalStrategy(
         {
             usernameField: 'email',
@@ -33,6 +37,7 @@ module.exports = function(passport, user) {
         },
 
         function(req, email, password, done) {
+            //hash password
             var generateHash = function(password) {
                 return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
             };
@@ -73,8 +78,9 @@ module.exports = function(passport, user) {
 
 
 
+    //CUSTOM LOCAL STRATEGY FOR SIGNING IN A NEW USER
+    //--------------------------------------------------------------------------------------------------------------------------
 
-    //define custom strategy for singing in a user
     passport.use('local-signin', new LocalStrategy(
         {
             usernameField: 'email',

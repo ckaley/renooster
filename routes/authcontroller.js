@@ -1,3 +1,4 @@
+//DEFINE FUNCTIONS THAT RENDER PAGES. TO BE USED IN auth.js
 var register = function(req, res){
     res.render("register")
 };
@@ -16,51 +17,8 @@ var dashboard = function(req, res){
     res.render("index")
 }
 
+//EXPORT FUNCTIONS
 exports.register = register;
 exports.login = login;
 exports.logout = logout;
 exports.dashboard = dashboard;
-    
-
-
-//ways that did not work (broke the app) 
-//=================================================================
-// // @route:  GET /register
-    // // @desc:   Return register template
-    // exports.register = function(req, res) {
-    //     res.render("register");
-    // };
-
-    // exports.login = function(req, res){
-    //     res.render("login")
-    // };
-
-    // exports.logout = function(req, res) {
-    //     req.session.destroy(function(err) {
-    //         res.redirect('/');
-    //     });
-    // };
-
-//======================================================================
-// module.exports = function(app){
-//     // @route:  GET /login
-//     // @desc:   Return login template
-//     app.get("/login", function (req, res) {
-//         res.render("login");
-//     });
-
-//     // @route:  GET /register
-//     // @desc:   Return register template
-//     app.get("/register" , function(req, res) {
-//         res.render("register");
-//     });
-
-//     // @route:  GET /logout
-//     // @desc:   Destroy session and return to login template
-//     app.get("/logout", function(req, res) {
-//         req.session.destroy(function(err) {
-//             res.redirect('/login');
-//         });
-//     });
-
-// }
