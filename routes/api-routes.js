@@ -1,3 +1,4 @@
+//IMPORT DEPENDENCIES
 var db = require("../models");
 
 module.exports = function(app) {
@@ -48,7 +49,7 @@ module.exports = function(app) {
   // @desc:   Update one record from the subscriptions table by ID
   app.put("/api/edit/:id", function(req, res){
     console.log("I am here, please acknowledge that I am here")
-    //Update takes in object descriping the properties we want to update. Uses WHERE to specify the object that is to be updated
+    //Update takes in object describing the properties we want to update. Uses WHERE to specify the object that is to be updated
     db.Subscription.update({
       name: req.body.name,
       startDate: req.body.startDate,

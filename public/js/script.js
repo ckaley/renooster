@@ -1,5 +1,8 @@
 $(function () {
-    //global empty variables
+    //==========================================================================================================================
+    //GLOBAL EMPTY VARIABLES
+    //==========================================================================================================================
+    
     let editId
     let deleteId
     let name = ''
@@ -8,7 +11,10 @@ $(function () {
     let price = 0.0
     let frequency = ''
 
-
+    //==========================================================================================================================
+    //FUNCTIONS FOR CRUD FUNCTIONALITY
+    //==========================================================================================================================
+    
     //CREATE NEW SUBSCRIPTION - front end api call that sends user generated data to server
     const createSubscription = payload => {
         $.ajax({
@@ -29,6 +35,7 @@ $(function () {
     }
 
     //SHOW ALL SUBSCRIPTIONS - front end api call that fetches all data from the database and appends to page
+    //--------------------------------------------------------------------------------------------------------------------------
     const fetchSubscriptions = () => {
         $.ajax({
             method: "GET",
@@ -70,9 +77,9 @@ $(function () {
             })
         }).catch(err => console.log(err))
     }
-
     
-    //UPDATE SUBSCRIPTION - front end api call that sends user generated data to server
+    //UPDATE SUBSCRIPTION - front end api call that allows user to update data in database by ID
+    //--------------------------------------------------------------------------------------------------------------------------
     const updateSubscription = payload => {
         console.log(payload)
         $.ajax({
@@ -95,7 +102,8 @@ $(function () {
         }).catch(err => console.log(err))
     }
 
-    //DELETE subscription
+    //DELETE SUBSCRIPTION - front end api call that allows user to delete data from database by ID
+    //--------------------------------------------------------------------------------------------------------------------------
     const deleteSubscription = deleteId => {
         console.log(deleteId)
         $.ajax({
@@ -109,6 +117,12 @@ $(function () {
     }
     
 
+    //==========================================================================================================================
+    //EVENT HANDLERS
+    //==========================================================================================================================
+    
+    //ADDING A NEW SUBSCRIPTION
+    //--------------------------------------------------------------------------------------------------------------------------
     // handle change event for adding subscription name
     $("#name").on("change", event => {
         // destructure event
@@ -127,12 +141,13 @@ $(function () {
         endDate = event.target.value
     })
 
+    // handle change event for adding price
     $("#price").on("change", event => {
         // destructure event
         price = event.target.value
     })
 
-    // handle change event for adding start date
+    // handle change event for adding frequency
     $("#frequency").on("change", event => {
         // destructure event
         frequency = event.target.value
@@ -151,12 +166,13 @@ $(function () {
             price: price,
             frequency
         }
-
         // create subscription
         createSubscription(payload)
     })
 
-
+    //EDITING A SUBPSCRIPTION
+    //--------------------------------------------------------------------------------------------------------------------------
+    
     //event handler for editBtn
     $("div").on("click", ".editBtn", event => {
         console.log("gonna edit a sub")
@@ -172,55 +188,40 @@ $(function () {
             data: id
         }).then(subscriptions => {
             console.log(subscriptions)
-
-
-        window.location.href = `/edit/${id}`
-    })
-})
-
-
-    //event handler for deleteBtn
-    $("div").on("click", ".deleteBtn", event => {
-        console.log("gonna delete a sub")
-        console.log(event.target.id)
-        var id = event.target.id
-        deleteId = id
-        console.log(deleteId)
-        event.stopPropagation()
-        deleteSubscription(deleteId)
-
+            window.location.href = `/edit/${id}`
+        })
     })
 
-
-    // handle change event for adding subscription name
+    // handle change event for updating subscription name
     $("#edit-name").on("change", event => {
         // destructure event
         name = event.target.value
     })
 
-    // handle change event for adding start date
+    // handle change event for updating start date
     $("#edit-startDate").on("change", event => {
         // destructure event
         startDate = event.target.value
     })
 
-    // handle change event for adding end date
+    // handle change event for updating end date
     $("#edit-endDate").on("change", event => {
         // destructure event
         endDate = event.target.value
     })
 
+    // handle change event for updating price
     $("#edit-price").on("change", event => {
         // destructure event
         price = event.target.value
     })
-
+    // handle change event for updating frequency
     $("#edit-frequency").on("change", event => {
         // destructure event
         frequency = event.target.value
     })
-
-    // handle edit event
+    
+    // handle edit event (submit update form)
     $("#editSubForm").on("submit", event => {
         // prevent default
         event.preventDefault()
@@ -240,7 +241,23 @@ $(function () {
         updateSubscription(payload)
     })
 
-
-    // fetch Subscriptions
+    //DELETING A SUBPSCRIPTION
+    //--------------------------------------------------------------------------------------------------------------------------
+    //event handler for deleteBtn
+    $("div").on("click", ".deleteBtn", event => {
+        console.log("gonna delete a sub")
+        console.log(event.target.id)
+        var id = event.target.id
+        deleteId = id
+        console.log(deleteId)
+        event.stopPropagation()
+        deleteSubscription(deleteId)
+    
+    })
+    
+    //==========================================================================================================================
+    //FUNCTION TO POPULATE PAGE
+    //==========================================================================================================================
+    // call function to render all existing subscription records to page
     fetchSubscriptions()
 })

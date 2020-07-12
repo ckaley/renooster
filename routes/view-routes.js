@@ -1,10 +1,6 @@
-// routes
+//VIEW ROUTES FOR SERVING UP PAGE TEMPLATES
+//index or main page view route is associated with user login, found in authController.js
 module.exports = function (app) {
-    // // @route:  GET /
-    // // @desc:   Render index template
-    // app.get("/", function (req, res) {
-    //     res.render("index");
-    // });
 
     // @route:  GET /add
     // @desc:   Return add template
