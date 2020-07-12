@@ -6,10 +6,12 @@
             <div class="card-body">
                 <h5 class="card-title">Edit Subscription</h5>
                 <p class="card-text"></p>
-                <form id = "editSubForm">
+                <form id="editSubForm">
                     <div class="form-group">
                         <label>Subcription Name</label>
+
                         <input type="text" class="form-control" id="edit-name">
+
                     </div>
                     <div class="form-group">
                         <label>Start Date:</label>
@@ -27,9 +29,26 @@
                         <label>Frequency:</label>
                         <input type="text" class="form-control" id="edit-frequency">
                     </div>
-                    <button type="submit" class="btn btn-primary" id="editSubmitBtn" data="{{id}}">Submit</button>
+                    <button type="submit" class="btn btn-primary" id="editSubmitBtn" data="{{id}}">Update</button>
+                    <a href="/" class="btn btn-danger" id="cancelBtn">Cancel</a>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    var subStore;
+    subStore = JSON.parse(localStorage.getItem("savedSubs"))
+    for (var i = 0; i < subStore.length; i++) {
+        if (subStore[i].id == $("#editSubmitBtn").attr("data").valueOf()) {
+            $("#edit-name").val(subStore[i].name)
+            $("#edit-startDate").val(subStore[i].startDate)
+            $("#edit-endDate").val(subStore[i].endDate)
+            $("#edit-price").val(subStore[i].price)
+            $("#edit-frequency").val(subStore[i].frequency)
+        }
+    }
+
+
+</script>

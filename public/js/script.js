@@ -2,7 +2,7 @@ $(function () {
     //==========================================================================================================================
     //GLOBAL EMPTY VARIABLES
     //==========================================================================================================================
-    
+
     let editId
     let deleteId
     let name = ''
@@ -10,11 +10,12 @@ $(function () {
     let endDate = ''
     let price = 0.0
     let frequency = ''
+    let subStore = []
 
     //==========================================================================================================================
     //FUNCTIONS FOR CRUD FUNCTIONALITY
     //==========================================================================================================================
-    
+
     //CREATE NEW SUBSCRIPTION - front end api call that sends user generated data to server
     const createSubscription = payload => {
         $.ajax({
@@ -74,10 +75,13 @@ $(function () {
 
                 // append card to dom
                 $("#subscriptions").append(card)
+                subStore.push(subscription)
+                localStorage.setItem("savedSubs", JSON.stringify(subStore))
+
             })
         }).catch(err => console.log(err))
     }
-    
+
     //UPDATE SUBSCRIPTION - front end api call that allows user to update data in database by ID
     //--------------------------------------------------------------------------------------------------------------------------
     const updateSubscription = payload => {
@@ -90,8 +94,9 @@ $(function () {
             // reset form inputs
             console.log("HERE I AM" + payload)
             console.log(payload)
+
             // fill fields with existing dataTypes
-            $("#name").val(payload.name)
+            $("#name").val()
             $("#startDate").val(payload.startDate)
             $("#endDate").val(payload.endDate)
             $("#price").val(payload.price)
@@ -110,17 +115,17 @@ $(function () {
             method: "DELETE",
             url: "/api/subscriptions/" + deleteId,
             data: deleteId
-        }).then(() =>{
-            console.log("You deleted subscription with id: " +deleteId)
+        }).then(() => {
+            console.log("You deleted subscription with id: " + deleteId)
             location.reload()
         })
     }
-    
+
 
     //==========================================================================================================================
     //EVENT HANDLERS
     //==========================================================================================================================
-    
+
     //ADDING A NEW SUBSCRIPTION
     //--------------------------------------------------------------------------------------------------------------------------
     // handle change event for adding subscription name
@@ -172,7 +177,7 @@ $(function () {
 
     //EDITING A SUBPSCRIPTION
     //--------------------------------------------------------------------------------------------------------------------------
-    
+
     //event handler for editBtn
     $("div").on("click", ".editBtn", event => {
         console.log("gonna edit a sub")
@@ -220,7 +225,7 @@ $(function () {
         // destructure event
         frequency = event.target.value
     })
-    
+
     // handle edit event (submit update form)
     $("#editSubForm").on("submit", event => {
         // prevent default
@@ -252,9 +257,9 @@ $(function () {
         console.log(deleteId)
         event.stopPropagation()
         deleteSubscription(deleteId)
-    
+
     })
-    
+
     //==========================================================================================================================
     //FUNCTION TO POPULATE PAGE
     //==========================================================================================================================
