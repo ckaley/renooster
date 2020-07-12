@@ -16,4 +16,10 @@ module.exports = function (app) {
         res.render("edit", req.params);
 
     });
+
+    // @route:  GET /expire
+    // @desc:   Return expire template
+    app.get("/expire", function (req, res) {
+        res.render("expire");
+    });
 };

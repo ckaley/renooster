@@ -1,5 +1,6 @@
 //IMPORT DEPENDENCIES
 var db = require("../models");
+var moment = require("moment")
 
 module.exports = function(app) {
   // @route:  GET /
@@ -65,4 +66,20 @@ module.exports = function(app) {
         res.json(dbSubscription)
       });
   });
+
+  // @route: GET /
+  // @desc: Read all records that have endDate within 30 days from today
+  app.get("/api/subscriptions/expire", function(req, res){
+    const { Op } = require('sequelize')
+    db.Subscription.findAll({
+      where: {
+        endDate: {
+          [Op.lte]: moment().add(30, 'days').toDate()
+        }
+      }
+    }).then(function(dbSubscription){
+      res.json(dbSubscription);
+    });
+  });
+
 };
