@@ -1,3 +1,5 @@
+{{!-- TEMPLATE FOR MAIN PAGE DISPLAYING SUBSCRIPTIONS IN THE DATABASE --}}
+
 <div class="container">
     <div class="row">
         <div class="col-md-4">
@@ -6,26 +8,18 @@
         <div class="col-md-4">
             <p>Renooster</p>
         </div>
-        <div class="col-md-4 text-right">
+        <div class="col-md-2 text-right">
             <a href="/add" class="btn btn-primary">New Subscription</a>
         </div>
+        <div class="col-md-2 text-right">
+            <a href="/logout" class="btn btn-secondary">Sign Out</a>
+        </div>
+        
     </div>
     <div class="row" id="subscriptions">
-        {{#each subscriptions}}
-        {{log}}
-        <div class="card">
-            <h5 class="card-header">{{name}}</h5>
-            <div class="card-body">
-                <b><p class="card-text">{{startDate}}</p></b>
-                <p class="card-text">{{endDate}}</p>
-                <button type="button" class="btn btn-primary">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-            </div>
-        </div>
-        {{/each}}
+
     </div>
 </div>
-
 
 
 
