@@ -1,7 +1,52 @@
+h1 {
+  font-family: "Cherry Cream Soda", cursive;
+  font-size: 120px;
+  text-align: center;
+  color: #d52b14;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+h4 {
+  font-weight: 600;
+  text-align: center;
+}
+
 body {
-    margin: 40px 0;
+  background-image: url("/img/renoosteranimals_bg.png");
+  background-size: cover;
+  background-color: #3bb5e0;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+}
+
+.page-header img {
+  float: left;
+  width: 120px;
+  height: 120px;
+  display: inline-block;
+  margin-top: 28px;
+  margin-right: 25px;
+}
+
+.page-header h1 {
+  font-weight: 600;
+  position: relative;
+  top: 18px;
+  display: inline-block;
 }
 
 .card {
-    margin: 10px 0;
+  margin: 50px 0;
+  border-width: 2px;
+  border-style: solid solid solid solid;
+  border-color: #000;
+}
+
+.card-title {
+  font-weight: 600;
+  margin-bottom: 30px;
 }
