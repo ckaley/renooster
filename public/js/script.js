@@ -184,6 +184,7 @@ $(function () {
         console.log(event.target.id)
         var id = event.target.id
         editId = id
+
         console.log(editId)
         event.stopPropagation()
 
@@ -234,6 +235,21 @@ $(function () {
         console.log("button clicked")
         // create payload
         console.log(editId) //---undefined
+        if (!name) {
+            name = localStorage.getItem("name")
+        }
+        if (!startDate) {
+            startDate = localStorage.getItem("startDate")
+        }
+        if (!endDate) {
+            endDate = localStorage.getItem("endDate")
+        }
+        if (!price) {
+            price = localStorage.getItem("price")
+        }
+        if (!frequency) {
+            frequency = localStorage.getItem("frequency")
+        }
         const payload = {
             id: $("#editSubmitBtn").attr("data"),
             name: name,

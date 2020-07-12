@@ -36,17 +36,24 @@
         </div>
     </div>
 </div>
+<script src="/js/script.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     var subStore;
     subStore = JSON.parse(localStorage.getItem("savedSubs"))
+
     for (var i = 0; i < subStore.length; i++) {
         if (subStore[i].id == $("#editSubmitBtn").attr("data").valueOf()) {
             $("#edit-name").val(subStore[i].name)
+            localStorage.setItem("name", subStore[i].name)
             $("#edit-startDate").val(subStore[i].startDate)
+            localStorage.setItem("startDate", subStore[i].startDate)
             $("#edit-endDate").val(subStore[i].endDate)
+            localStorage.setItem("endDate", subStore[i].endDate)
             $("#edit-price").val(subStore[i].price)
+            localStorage.setItem("price", subStore[i].price)
             $("#edit-frequency").val(subStore[i].frequency)
+            localStorage.setItem("frequency", subStore[i].frequency)
         }
     }
 
