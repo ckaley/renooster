@@ -25,16 +25,18 @@ module.exports = function(app) {
 
   // @route: GET /
   // @desc: Read all records that have endDate within 30 days from today
-  const { Op } = require('sequelize')
   app.get("/api/subscriptions/expire", function(req, res){
+    const { Op } = require('sequelize')
     db.Subscription.findAll({
       where: {
         endDate: {
           [Op.lte]: moment().add(30, 'days').toDate()
         }
       }
-    })
-  })
+    }).then(function(dbSubscription){
+      res.json(dbSubscription);
+    });
+  });
 
   // @route:  POST /
   // @desc:   Add one record to the subscriptions table
