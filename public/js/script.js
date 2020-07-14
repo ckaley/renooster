@@ -11,7 +11,8 @@ $(function () {
   let price = 0.0;
   let frequency = "";
   let subStore = [];
-  var audioElement = new Audio("../sounds/cowmoo.mp3");
+  var audioElementMoo = new Audio("../sounds/cowmoo.mp3");
+  var audioElementRooster = new Audio("../sounds/cockadoodle.mp3");
 
   //==========================================================================================================================
   //FUNCTIONS FOR CRUD FUNCTIONALITY
@@ -20,10 +21,10 @@ $(function () {
   //CREATE NEW SUBSCRIPTION - front end api call that sends user generated data to server
   const createSubscription = (payload) => {
     $.ajax({
-      method: "POST",
-      url: "/api/subscriptions",
-      data: payload,
-    })
+        method: "POST",
+        url: "/api/subscriptions",
+        data: payload,
+      })
       .then(() => {
         // navigate to "/"
         window.location.href = "/";
@@ -35,9 +36,9 @@ $(function () {
   //--------------------------------------------------------------------------------------------------------------------------
   const fetchSubscriptions = () => {
     $.ajax({
-      method: "GET",
-      url: "/api/subscriptions",
-    })
+        method: "GET",
+        url: "/api/subscriptions",
+      })
       .then((subscriptions) => {
         console.log(subscriptions);
 
@@ -78,7 +79,7 @@ $(function () {
                 "https://images-na.ssl-images-amazon.com/images/I/411j1k1u9yL._SY450_.png";
               break;
             default:
-              "../img/renoosterlogo.png";
+              icon = "/img/renoosterlogo.png";
           }
 
           // format subscription as bootstrap card
@@ -94,7 +95,7 @@ $(function () {
                                 <p class="card-text">Frequency: <i>${frequency}</i></p>
                                 <button class="btn btn-secondary editBtn" id="${id}">Edit</button>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-danger deleteBtn" data-toggle="modal" data-target="#exampleModal" id="${id}">
+                                <button type="button" class="btn btn-danger deleteBtn" data-toggle="modal" data-target="#deleteModal" id="${id}">
                                   Delete
                                 </button>
                             </div>
@@ -115,9 +116,9 @@ $(function () {
   //--------------------------------------------------------------------------------------------------------------------------
   const expireSubscriptions = () => {
     $.ajax({
-      method: "GET",
-      url: "/api/subscriptions/expire",
-    })
+        method: "GET",
+        url: "/api/subscriptions/expire",
+      })
       .then((subscriptions) => {
         console.log("expiring soon:");
         console.log(subscriptions);
@@ -158,7 +159,7 @@ $(function () {
                 "https://images-na.ssl-images-amazon.com/images/I/411j1k1u9yL._SY450_.png";
               break;
             default:
-              "../img/renoosterlogo.png";
+              icon = "/img/renoosterlogo.png";
           }
           // format subscription as bootstrap card
           const expiringCards = `
@@ -194,10 +195,10 @@ $(function () {
   const updateSubscription = (payload) => {
     console.log(payload);
     $.ajax({
-      method: "PUT",
-      url: "/api/edit/" + payload.id,
-      data: payload,
-    })
+        method: "PUT",
+        url: "/api/edit/" + payload.id,
+        data: payload,
+      })
       .then(() => {
         // navigate to "/"
         window.location.href = "/";
@@ -367,30 +368,8 @@ $(function () {
     var id = event.target.id;
     deleteId = id;
     console.log(deleteId);
-    audioElement.play();
-  });
-
-  //EXPIRING SOON
-  //--------------------------------------------------------------------------------------------------------------------------
-  //event handler for expireBtn
-  $("div").on("click", "#expireBtn", (event) => {
-    event.stopPropagation();
-    $("#subscriptions").empty();
-    expireSubscriptions();
-  });
-
-  //==========================================================================================================================
-  //FUNCTION TO POPULATE PAGE
-  //==========================================================================================================================
-  // call function to render all existing subscription records to page
-  fetchSubscriptions();
-
-  //==========================================================================================================================
-  //MODAL FUNCTIONALITY
-  //==========================================================================================================================
-  // event listener for the modal button
-  $("#myModal").on("shown.bs.modal", function () {
-    $("#myInput").trigger("focus");
+    $("#deleteModal").modal("show");
+    audioElementMoo.play();
   });
 
   // when user clicks "yes" on warning modal delete subscription
@@ -399,4 +378,22 @@ $(function () {
     event.preventDefault();
     deleteSubscription(deleteId);
   });
+
+  //EXPIRING SOON
+  //--------------------------------------------------------------------------------------------------------------------------
+  //event handler for expireBtn
+  $("div").on("click", "#expireBtn", (event) => {
+    event.stopPropagation();
+    $("#subscriptions").empty();
+
+    expireSubscriptions();
+    $("#expireModal").modal("toggle");
+    audioElementRooster.play();
+  });
+
+  //==========================================================================================================================
+  //FUNCTION TO POPULATE PAGE
+  //==========================================================================================================================
+  // call function to render all existing subscription records to page
+  fetchSubscriptions();
 });
