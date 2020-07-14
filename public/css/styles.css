@@ -23,19 +23,28 @@ body {
   font-weight: 600;
 }
 
+.navbar {
+  background-color: black;
+  height: 50px;
+}
+
+.navbar-brand {
+  color: white;
+}
+
 .page-header img {
   float: left;
   width: 120px;
   height: 120px;
   display: inline-block;
-  margin-top: 28px;
+  margin-top: 70px;
   margin-right: 25px;
 }
 
 .page-header h1 {
   font-weight: 600;
+  margin-top: 60px;
   position: relative;
-  top: 18px;
   display: inline-block;
 }
 
@@ -49,4 +58,18 @@ body {
 .card-title {
   font-weight: 600;
   margin-bottom: 30px;
+}
+
+.modal-body {
+  text-align: center;
+  display: inline-block;
+}
+
+.modal-title {
+  color: red;
+  font-weight: 600;
+}
+
+.expireWarning {
+  color: #d52b14;
 }
