@@ -1,4 +1,33 @@
 {{!-- TEMPLATE FOR PAGE DEDICATED TO UPDATING AN EXISTING SUBSCRIPTION IN THE DATABASE --}}
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="/">Renooster</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/add">Add</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Expiring Soon</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Sign Out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="page-header">
+    <img src="img/renoosterlogo.png" alt="Renooster Logo" />
+    <h1>Renooster</h1>
+    <h4>The easy way to manage your subscriptions!</h4>
+</div>
 
 <div class="row justify-content-center">
     <div class="col-sm-12 col-md-9 col-lg-6">
@@ -8,7 +37,7 @@
                 <p class="card-text"></p>
                 <form id="editSubForm">
                     <div class="form-group">
-                        <label>Subcription Name</label>
+                        <label>Subscription Name</label>
 
                         <input type="text" class="form-control" id="edit-name">
 

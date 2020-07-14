@@ -20,18 +20,11 @@ $(function () {
   //CREATE NEW SUBSCRIPTION - front end api call that sends user generated data to server
   const createSubscription = (payload) => {
     $.ajax({
-      method: "POST",
-      url: "/api/subscriptions",
-      data: payload,
-    })
+        method: "POST",
+        url: "/api/subscriptions",
+        data: payload,
+      })
       .then(() => {
-        // reset form inputs
-        $("#name").val("");
-        $("#startDate").val("");
-        $("#endDate").val("");
-        $("#price").val("");
-        $("#frequency").val("");
-
         // navigate to "/"
         window.location.href = "/";
       })
@@ -42,9 +35,9 @@ $(function () {
   //--------------------------------------------------------------------------------------------------------------------------
   const fetchSubscriptions = () => {
     $.ajax({
-      method: "GET",
-      url: "/api/subscriptions",
-    })
+        method: "GET",
+        url: "/api/subscriptions",
+      })
       .then((subscriptions) => {
         console.log(subscriptions);
 
@@ -59,12 +52,30 @@ $(function () {
             price,
             frequency,
           } = subscription;
-
+          if (name === "Netflix" || name === "netflix") {
+            var icon = "https://mk0knowtechie1qof48y.kinstacdn.com/wp-content/uploads/2014/08/netflix-icon.jpg"
+          }
+          if (name === "Hulu" || name === "hulu") {
+            var icon = "https://www.freeiconspng.com/uploads/hulu-icon-9.png"
+          }
+          if (name === "ESPN" || name === "espn" || name === "Espn") {
+            var icon = "https://cdn.iconscout.com/icon/free/png-512/espn-1-461787.png"
+          }
+          if (name === "ArcGIS" || name === "arcgis" || name === "ARCGIS" || name === "ArcGis") {
+            var icon = "https://f0.pngfuel.com/png/164/786/planet-earth-artwork-png-clip-art.png"
+          }
+          if (name === "Disney+" || name === "disney+") {
+            var icon = "https://resize.indiatvnews.com/en/resize/newbucket/715_-/2019/04/disney-plus-1555068793.jpg"
+          }
+          if (name === "Amazon" || name === "Amazon Prime" || name === "amazon prime") {
+            var icon = "https://images-na.ssl-images-amazon.com/images/I/411j1k1u9yL._SY450_.png"
+          }
           // format subscription as bootstrap card
           const card = `
                     <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
                         <div class="card">
                             <div class="card-body">
+                              <img src=${icon} width="100" height="100">
                                 <h5 class="card-title">${name}</h5>
                                 <p class="card-text">Start Date: <i>${startDate}</i></p>
                                 <p class="card-text">End Date: <i>${endDate}</i></p>
@@ -142,22 +153,11 @@ $(function () {
   const updateSubscription = (payload) => {
     console.log(payload);
     $.ajax({
-      method: "PUT",
-      url: "/api/edit/" + payload.id,
-      data: payload,
-    })
+        method: "PUT",
+        url: "/api/edit/" + payload.id,
+        data: payload,
+      })
       .then(() => {
-        // reset form inputs
-        console.log("HERE I AM" + payload);
-        console.log(payload);
-
-        // fill fields with existing dataTypes
-        $("#name").val();
-        $("#startDate").val(payload.startDate);
-        $("#endDate").val(payload.endDate);
-        $("#price").val(payload.price);
-        $("#frequency").val(payload.frequency);
-
         // navigate to "/"
         window.location.href = "/";
       })
