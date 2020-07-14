@@ -1,5 +1,4 @@
 {{!-- TEMPLATE FOR PAGE DEDICATED TO UPDATING AN EXISTING SUBSCRIPTION IN THE DATABASE --}}
-
 <div class="row justify-content-center">
     <div class="col-sm-12 col-md-9 col-lg-6">
         <div class="card">
@@ -8,7 +7,7 @@
                 <p class="card-text"></p>
                 <form id="editSubForm">
                     <div class="form-group">
-                        <label>Subcription Name</label>
+                        <label>Subscription Name</label>
 
                         <input type="text" class="form-control" id="edit-name">
 
@@ -23,7 +22,7 @@
                     </div>
                     <div class="form-group">
                         <label>Price:</label>
-                        <input type="number" class="form-control" id="edit-price">
+                        <input type="number" step="any" class="form-control" id="edit-price">
                     </div>
                     <div class="form-group">
                         <label>Frequency:</label>
@@ -36,17 +35,24 @@
         </div>
     </div>
 </div>
+<script src="/js/script.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     var subStore;
     subStore = JSON.parse(localStorage.getItem("savedSubs"))
+
     for (var i = 0; i < subStore.length; i++) {
         if (subStore[i].id == $("#editSubmitBtn").attr("data").valueOf()) {
             $("#edit-name").val(subStore[i].name)
+            localStorage.setItem("name", subStore[i].name)
             $("#edit-startDate").val(subStore[i].startDate)
+            localStorage.setItem("startDate", subStore[i].startDate)
             $("#edit-endDate").val(subStore[i].endDate)
+            localStorage.setItem("endDate", subStore[i].endDate)
             $("#edit-price").val(subStore[i].price)
+            localStorage.setItem("price", subStore[i].price)
             $("#edit-frequency").val(subStore[i].frequency)
+            localStorage.setItem("frequency", subStore[i].frequency)
         }
     }
 
