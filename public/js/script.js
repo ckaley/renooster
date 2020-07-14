@@ -20,10 +20,10 @@ $(function () {
   //CREATE NEW SUBSCRIPTION - front end api call that sends user generated data to server
   const createSubscription = (payload) => {
     $.ajax({
-        method: "POST",
-        url: "/api/subscriptions",
-        data: payload,
-      })
+      method: "POST",
+      url: "/api/subscriptions",
+      data: payload,
+    })
       .then(() => {
         // navigate to "/"
         window.location.href = "/";
@@ -35,9 +35,9 @@ $(function () {
   //--------------------------------------------------------------------------------------------------------------------------
   const fetchSubscriptions = () => {
     $.ajax({
-        method: "GET",
-        url: "/api/subscriptions",
-      })
+      method: "GET",
+      url: "/api/subscriptions",
+    })
       .then((subscriptions) => {
         console.log(subscriptions);
 
@@ -52,30 +52,41 @@ $(function () {
             price,
             frequency,
           } = subscription;
-          if (name === "Netflix" || name === "netflix") {
-            var icon = "https://mk0knowtechie1qof48y.kinstacdn.com/wp-content/uploads/2014/08/netflix-icon.jpg"
+          var icon;
+          switch (name) {
+            case "Netflix" || "netflix":
+              icon =
+                "https://mk0knowtechie1qof48y.kinstacdn.com/wp-content/uploads/2014/08/netflix-icon.jpg";
+              break;
+            case "Hulu" || "hulu":
+              icon = "https://www.freeiconspng.com/uploads/hulu-icon-9.png";
+              break;
+            case "ESPN" || "espn" || "Espn":
+              icon =
+                "https://cdn.iconscout.com/icon/free/png-512/espn-1-461787.png";
+              break;
+            case "ArcGIS" || "arcgis" || "ARCGIS" || "ArcGis":
+              icon =
+                "https://upload.wikimedia.org/wikipedia/commons/d/df/ArcGIS_logo.png";
+              break;
+            case "Disney+" || "disney+":
+              icon =
+                "https://d2e111jq13me73.cloudfront.net/sites/default/files/styles/product_image_aspect_switcher_170w/public/product-images/csm-app/disney-app-product-image.png?itok=PvLVdrzm";
+              break;
+            case "Amazon" || "Amazon Prime" || "amazon prime":
+              icon =
+                "https://images-na.ssl-images-amazon.com/images/I/411j1k1u9yL._SY450_.png";
+              break;
+            default:
+              "../img/renoosterlogo.png";
           }
-          if (name === "Hulu" || name === "hulu") {
-            var icon = "https://www.freeiconspng.com/uploads/hulu-icon-9.png"
-          }
-          if (name === "ESPN" || name === "espn" || name === "Espn") {
-            var icon = "https://cdn.iconscout.com/icon/free/png-512/espn-1-461787.png"
-          }
-          if (name === "ArcGIS" || name === "arcgis" || name === "ARCGIS" || name === "ArcGis") {
-            var icon = "https://f0.pngfuel.com/png/164/786/planet-earth-artwork-png-clip-art.png"
-          }
-          if (name === "Disney+" || name === "disney+") {
-            var icon = "https://resize.indiatvnews.com/en/resize/newbucket/715_-/2019/04/disney-plus-1555068793.jpg"
-          }
-          if (name === "Amazon" || name === "Amazon Prime" || name === "amazon prime") {
-            var icon = "https://images-na.ssl-images-amazon.com/images/I/411j1k1u9yL._SY450_.png"
-          }
+
           // format subscription as bootstrap card
           const card = `
                     <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
                         <div class="card">
                             <div class="card-body">
-                              <img src=${icon} width="100" height="100">
+                              <img src=${icon} width="150" height="150">
                                 <h5 class="card-title">${name}</h5>
                                 <p class="card-text">Start Date: <i>${startDate}</i></p>
                                 <p class="card-text">End Date: <i>${endDate}</i></p>
@@ -100,31 +111,61 @@ $(function () {
       .catch((err) => console.log(err));
   };
 
-    //SHOW ALL EXPIRING SOON SUBSCRIPTIONS - front end api call that fetches date specific data from the database and appends to page
-    //--------------------------------------------------------------------------------------------------------------------------
-    const expireSubscriptions = () => {
-      $.ajax({
-          method: "GET",
-          url: "/api/subscriptions/expire"
-      }).then(subscriptions => {
-          console.log("expiring soon:")
-          console.log(subscriptions)
-          // append new node for each subscription
-          subscriptions.forEach(subscription => {
-              // destructure subscription
-              const {
-                  id,
-                  name,
-                  startDate,
-                  endDate,
-                  price,
-                  frequency
-              } = subscription
-              // format subscription as bootstrap card
-              const expiringCards = `
+  //SHOW ALL EXPIRING SOON SUBSCRIPTIONS - front end api call that fetches date specific data from the database and appends to page
+  //--------------------------------------------------------------------------------------------------------------------------
+  const expireSubscriptions = () => {
+    $.ajax({
+      method: "GET",
+      url: "/api/subscriptions/expire",
+    })
+      .then((subscriptions) => {
+        console.log("expiring soon:");
+        console.log(subscriptions);
+        // append new node for each subscription
+        subscriptions.forEach((subscription) => {
+          // destructure subscription
+          const {
+            id,
+            name,
+            startDate,
+            endDate,
+            price,
+            frequency,
+          } = subscription;
+          var icon;
+          switch (name) {
+            case "Netflix" || "netflix":
+              icon =
+                "https://mk0knowtechie1qof48y.kinstacdn.com/wp-content/uploads/2014/08/netflix-icon.jpg";
+              break;
+            case "Hulu" || "hulu":
+              icon = "https://www.freeiconspng.com/uploads/hulu-icon-9.png";
+              break;
+            case "ESPN" || "espn" || "Espn":
+              icon =
+                "https://cdn.iconscout.com/icon/free/png-512/espn-1-461787.png";
+              break;
+            case "ArcGIS" || "arcgis" || "ARCGIS" || "ArcGis":
+              icon =
+                "https://upload.wikimedia.org/wikipedia/commons/d/df/ArcGIS_logo.png";
+              break;
+            case "Disney+" || "disney+":
+              icon =
+                "https://d2e111jq13me73.cloudfront.net/sites/default/files/styles/product_image_aspect_switcher_170w/public/product-images/csm-app/disney-app-product-image.png?itok=PvLVdrzm";
+              break;
+            case "Amazon" || "Amazon Prime" || "amazon prime":
+              icon =
+                "https://images-na.ssl-images-amazon.com/images/I/411j1k1u9yL._SY450_.png";
+              break;
+            default:
+              "../img/renoosterlogo.png";
+          }
+          // format subscription as bootstrap card
+          const expiringCards = `
                   <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
                       <div class="card">
                           <div class="card-body">
+                          <img src=${icon} width="150" height="150">
                               <h5 class="card-title">${name}</h5>
                               <p class="card-text">Start Date: <i>${startDate}</i></p>
                               <p class="card-text expireWarning">End Date: <i>${endDate}</i></p>
@@ -135,28 +176,28 @@ $(function () {
                           </div>
                       </div>
                   </div>
-              `
-              console.log("appending to page....")
-              //clear the page
-              
-              // append cards to dom
-              $("#subscriptions").append(expiringCards)
-              subStore.push(subscription)
-              localStorage.setItem("savedSubs", JSON.stringify(subStore))
+              `;
+          console.log("appending to page....");
+          //clear the page
 
-          })
-      }).catch(err => console.log(err))
-  }
+          // append cards to dom
+          $("#subscriptions").append(expiringCards);
+          subStore.push(subscription);
+          localStorage.setItem("savedSubs", JSON.stringify(subStore));
+        });
+      })
+      .catch((err) => console.log(err));
+  };
 
   //UPDATE SUBSCRIPTION - front end api call that allows user to update data in database by ID
   //--------------------------------------------------------------------------------------------------------------------------
   const updateSubscription = (payload) => {
     console.log(payload);
     $.ajax({
-        method: "PUT",
-        url: "/api/edit/" + payload.id,
-        data: payload,
-      })
+      method: "PUT",
+      url: "/api/edit/" + payload.id,
+      data: payload,
+    })
       .then(() => {
         // navigate to "/"
         window.location.href = "/";
@@ -330,21 +371,19 @@ $(function () {
   });
 
   //EXPIRING SOON
-    //--------------------------------------------------------------------------------------------------------------------------
-    //event handler for expireBtn
-    $("div").on("click", "#expireBtn", event => {
-      event.stopPropagation()
-      $("#subscriptions").empty()
-      expireSubscriptions()
-
-  })
+  //--------------------------------------------------------------------------------------------------------------------------
+  //event handler for expireBtn
+  $("div").on("click", "#expireBtn", (event) => {
+    event.stopPropagation();
+    $("#subscriptions").empty();
+    expireSubscriptions();
+  });
 
   //==========================================================================================================================
   //FUNCTION TO POPULATE PAGE
   //==========================================================================================================================
   // call function to render all existing subscription records to page
   fetchSubscriptions();
-  
 
   //==========================================================================================================================
   //MODAL FUNCTIONALITY
